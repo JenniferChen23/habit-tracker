@@ -2,13 +2,13 @@
   "name": "習慣追蹤",
   "short_name": "習慣追蹤",
   "description": "每日習慣追蹤 App",
-  "start_url": "/habit-tracker/",
+  "start_url": ".",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#534AB7",
   "orientation": "portrait",
   "icons": [
-    { "src": "/habit-tracker/icons/icon-193.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "/habit-tracker/icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
   ]
 }
