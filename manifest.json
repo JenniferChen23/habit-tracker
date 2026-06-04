@@ -1,6 +1,6 @@
 {
   "name": "習慣追蹤",
-  "short_name": "習慣",
+  "short_name": "習慣追蹤",
   "description": "每日習慣追蹤 App",
   "start_url": "/habit-tracker/",
   "display": "standalone",
