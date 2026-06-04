@@ -1,8 +1,8 @@
 const CACHE = 'habit-v1';
 const ASSETS = [
-  '/',
-  '/index.html',
-  '/manifest.json',
+  '/habit-tracker/',
+  '/habit-tracker/index.html',
+  '/habit-tracker/manifest.json',
   'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js'
 ];
 
