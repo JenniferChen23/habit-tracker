@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
+<link rel="manifest" href="/habit-tracker/manifest.json">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>習慣追蹤</title>
-<link rel="manifest" href="manifest.json">
 <meta name="theme-color" content="#534AB7">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="習慣追蹤">
+<link rel="apple-touch-icon" href="/habit-tracker/icons/icon-192.png">
+<title>習慣追蹤</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 :root {
@@ -376,7 +377,6 @@ function toggleTodayItem(id) {
   if (h.records[today] != null) { delete h.records[today]; showToast('已取消完成'); }
   else {
     if (h.template !== 'checkin') {
-      // use typed value if present, otherwise fall back to target or 0
       const inp = document.getElementById(`tli-${id}`);
       const typed = inp ? parseFloat(inp.value) : NaN;
       h.records[today] = (!isNaN(typed) && typed >= 0) ? typed : (h.target ?? 0);
@@ -618,7 +618,11 @@ function confirmDelete(id){
 function deleteHabit(id){
   habits=habits.filter(h=>h.id!==id);
   save(); document.querySelector('.confirm-modal')?.remove();
-  closeDetail(); showToast('習慣已刪除');
+  closeDetail();
+  renderTodayView();
+  renderDashboard();
+  updateStreak();
+  showToast('習慣已刪除');
 }
 
 // ── Dashboard ─────────────────────────────────────────────────────────────────
@@ -663,5 +667,17 @@ function calcStreak(h){
 }
 function calcMaxStreak(){ return habits.length?Math.max(...habits.map(calcStreak)):0; }
 </script>
+
+<!-- PWA Service Worker 註冊 -->
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/habit-tracker/sw.js')
+        .then(reg => console.log('SW registered:', reg.scope))
+        .catch(err => console.warn('SW registration failed:', err));
+    });
+  }
+</script>
+
 </body>
 </html>
